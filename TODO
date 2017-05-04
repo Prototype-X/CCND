@@ -1,0 +1,5 @@
+TODO add new storage type: git
+TODO add new transport snmp
+TODO add support get config from ftp server
+TODO add build-in ftp and tftp servers
+TODO add new network devices
