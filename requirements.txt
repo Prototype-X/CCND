@@ -1,0 +1,3 @@
+pexpect >= 4.2.1
+pluginbase >= 0.5
+ruamel.yaml >= 0.14.2

@@ -1,0 +1,11 @@
+%YAML 1.2
+---
+
+login: admin
+password: admin
+template: ssh-out-mtik
+storage: default
+info: |
+  New switch
+  work fine
+...

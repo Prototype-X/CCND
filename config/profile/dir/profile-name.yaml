@@ -1,0 +1,13 @@
+%YAML 1.2
+---
+
+login: admin
+password: admin
+template: telnet-tftp-dlink
+storage: tftp
+tftp_ip: 2.2.2.2
+tftp_path: /tftpboot
+info: |
+  New switch
+  work fine
+...

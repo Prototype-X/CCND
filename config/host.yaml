@@ -1,0 +1,15 @@
+%YAML 1.2
+---
+hostname:
+  state: True
+  group: group-name
+  ip: 1.1.1.1
+  profile: /dir/profile-name.yaml
+
+hostname2:
+  state: True
+  group: group-name2
+  ip: 1.1.1.2
+  profile: profile-name2.yaml
+
+...
