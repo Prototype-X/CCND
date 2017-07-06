@@ -1,3 +1,4 @@
+TODO add archiving(zip, tar.gz) for file storage
 TODO add new storage type: git
 TODO add new transport snmp
 TODO add support get config from ftp server
