@@ -4,7 +4,7 @@
 
 
 import argparse
-from shutil import copy2
+from shutil import copy2, make_archive, rmtree
 from multiprocessing import Pool
 import os
 import sys
@@ -136,7 +136,8 @@ class StorageManager(object):
     def __init__(self, path):
         # self.path = store_init['id']
         # self.type = store_init['type']
-        self.path = path
+        self.dir_root = path
+        self.dir_session = None
         self.path_session = None
         logger.info('Init StorageManager')
 
@@ -156,11 +157,17 @@ class StorageManager(object):
         return True
 
     def new_session(self):
-        self.path_session = '{}/backup-{}'.format(self.path, datetime.now().strftime("%Y-%m-%dT%H:%M"))
+        self.dir_session = 'backup-{}'.format(datetime.now().strftime("%Y-%m-%dT%H:%M"))
+        self.path_session = '{}/{}'.format(self.dir_root, self.dir_session)
         os.makedirs(self.path_session, exist_ok=True)
 
     def close_session(self):
         self.path_session = None
+        self.archive()
+
+    def archive(self):
+        make_archive(self.dir_session, 'gztar', self.path_session, self.dir_root)
+        rmtree(self.path_session)
 
 
 class BackupManager(object):
@@ -196,7 +203,7 @@ class BackupManager(object):
         # exit()
         self.storage.new_session()
         for result in results:
-            if self.config[result[0]]['storage'] == 'default' and result[1] != 'ERR' and result[1] is not None:
+            if self.config[result[0]]['storage'] in ('default', 'archive') and result[1] != 'ERR' and result[1] is not None:
                 self.storage.add_to_storage(result[0], result[1])
             elif self.config[result[0]]['storage'] == 'tftp' and result[1] != 'ERR':
                 if not self.storage.add_to_storage_from_tftp(result[0], self.config[result[0]]['tftp_path']):
