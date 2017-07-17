@@ -162,11 +162,11 @@ class StorageManager(object):
         os.makedirs(self.path_session, exist_ok=True)
 
     def close_session(self):
-        self.path_session = None
         self.archive()
+        self.path_session = None
 
     def archive(self):
-        make_archive(self.dir_session, 'gztar', self.path_session, self.dir_root)
+        make_archive(self.path_session, 'gztar', self.dir_root, self.dir_session)
         rmtree(self.path_session)
 
 
