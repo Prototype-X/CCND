@@ -1,0 +1,15 @@
+%YAML 1.2
+---
+storage:
+  file:
+    state: True
+    type: file
+    path: /opt/CCND/storage
+    archive: gztar
+
+  git:
+    state: True
+    type: git
+    path: /opt/CCND/git
+
+...

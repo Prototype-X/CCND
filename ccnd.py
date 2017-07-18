@@ -17,7 +17,28 @@ from logging.handlers import TimedRotatingFileHandler
 logger = logging.getLogger('CCND')
 
 
-class CfgYaml(object):
+class CCNDConfigYaml(object):
+    def __init__(self, config_path_fn: str):
+        self.config_path_fn = config_path_fn
+        self.config = {}
+        logger.info('Init CCND config')
+
+    def load(self):
+        with open(self.config_path_fn, 'r') as file:
+            try:
+                self.config = yaml.safe_load(file)
+            except yaml.YAMLError as exc:
+                print(exc)
+        return self.config
+
+    def save(self):
+        pass
+
+    def _save_config(self):
+        pass
+
+
+class HostConfigYaml(object):
     def __init__(self, config_path_fn: str, profile_path: str):
         self.config_path_fn = config_path_fn
         self.profile_path = profile_path
@@ -180,7 +201,7 @@ class BackupManager(object):
         logger.info('Init BackupManager')
 
     def _cfg_load(self):
-        self.cfg_obj = CfgYaml(self.path['host_path_fn'], self.path['profile_path'])
+        self.cfg_obj = HostConfigYaml(self.path['host_path_fn'], self.path['profile_path'])
         return self.cfg_obj.load()
 
     def _template_load(self):

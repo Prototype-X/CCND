@@ -1,7 +1,9 @@
 TODO add archiving tar.gz for file storage +
-TODO add new storage type: git
+TODO add new storage type: git, file, archive
+TODO add configuration file ccnd.yaml
 TODO add new transport snmp
 TODO add new transport http/https
 TODO add support get config from ftp server
 TODO add build-in ftp and tftp servers
 TODO add new network devices
+
