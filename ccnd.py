@@ -196,11 +196,11 @@ class BackupManager(object):
         self.path = path
         self.stat = []
         # self.template_source = self._template_load()
-        self.config = self._cfg_load()
+        self.config = self._host_cfg_load()
         self.storage = StorageManager(self.path['storage_path'])
         logger.info('Init BackupManager')
 
-    def _cfg_load(self):
+    def _host_cfg_load(self):
         self.cfg_obj = HostConfigYaml(self.path['host_path_fn'], self.path['profile_path'])
         return self.cfg_obj.load()
 
@@ -237,20 +237,23 @@ class BackupManager(object):
             logger.warning(err)
 
 
-def worker(host):
-    hostname = host[1]['name']
-    logger.info('Start backup device - Hostname: {} IP: {}'.format(hostname, host[1]['ip']))
+def worker(host_data):
+    hostname = host_data[1]['name']
+    host_ip = host_data[1]['ip']
+    template_name = host_data[1]['template']
+    plugin_path = host_data[0]
+    logger.info('Start backup device - Hostname: {} IP: {}'.format(hostname, host_ip))
     plugin_base = PluginBase(package='net-backup.plugins')
-    plugin_source = plugin_base.make_plugin_source(searchpath=[host[0]])
-    plugin_net_dev = plugin_source.load_plugin(host[1]['template'])
-    templ = plugin_net_dev.setup()
-    templ.load_data(host[1])
-    result = templ.activate()
+    plugin_source = plugin_base.make_plugin_source(searchpath=[plugin_path])
+    plugin_net_dev = plugin_source.load_plugin(template_name)
+    template = plugin_net_dev.setup()
+    template.load_data(host_data[1])
+    result = template.activate()
     if result == 'ERR':
-        logger.info('Error backup device - Hostname: {} IP: {}'.format(hostname, host[1]['ip']))
+        logger.info('Error backup device - Hostname: {} IP: {}'.format(hostname, host_ip))
         return hostname, result
-    templ.deactivate()
-    logger.info('End backup device - Hostname: {} IP: {}'.format(hostname, host[1]['ip']))
+    template.deactivate()
+    logger.info('End backup device - Hostname: {} IP: {}'.format(hostname, host_ip))
     return hostname, result
 
 

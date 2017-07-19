@@ -74,5 +74,4 @@ class GitStorage(object):
         os.makedirs(self.path_session, exist_ok=True)
 
     def close_session(self):
-        self.archive()
         self.path_session = None
