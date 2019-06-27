@@ -32,11 +32,14 @@ class SSH(object):
 
     def load_data(self, cfg_device: dict):
         self.cfg_device = cfg_device
+        if 'port' not in self.cfg_device:
+            self.cfg_device['port'] = 22
 
     def connect(self):
         try:
             ok = self.ssh.login(self.cfg_device['ip'], self.cfg_device['login'],
-                                password=self.cfg_device['password'], auto_prompt_reset=False, login_timeout=20)
+                                password=self.cfg_device['password'], port=self.cfg_device['port'],
+                                auto_prompt_reset=False, login_timeout=20)
             return ok
         except pxssh.ExceptionPxssh as err:
             print('ssh failed on login: IP {}, Host {}, Err{}'.format(self.cfg_device['ip'],

@@ -1,5 +1,22 @@
 %YAML 1.2
 ---
+fetch:
+
+  from_local_tftp:
+    type: tftp
+    ip: 5.5.5.5
+    path: /tftpboot
+    local: /tftpboot
+
+  from_remote_ftp:
+    type: ftp
+    ip: 6.6.6.6
+    port: 21
+    path: /config
+    login: admin
+    password: admin
+
+
 storage:
   file:
     state: True

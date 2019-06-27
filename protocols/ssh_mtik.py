@@ -26,10 +26,14 @@ class SSH(object):
 
     def load_data(self, cfg_device: dict):
         self.cfg_device = cfg_device
+        if 'port' not in self.cfg_device:
+            self.cfg_device['port'] = 22
 
     def connect(self):
         try:
-            self.cfg = pexpect.run('ssh {}@{} export'.format(self.cfg_device['login'], self.cfg_device['ip']),
+            self.cfg = pexpect.run('ssh -p {port} {login}@{pwd} export'.format(port=self.cfg_device['port'],
+                                                                               login=self.cfg_device['login'],
+                                                                               pwd=self.cfg_device['ip']),
                                    events={'(?i)password': '{}\n'.format(self.cfg_device['password']),
                                            '(?i)connecting (yes/no)?': 'yes\n'}, logfile=sys.stdout, echo=False)
             self.cfg = self.cfg.decode()

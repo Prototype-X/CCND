@@ -7,5 +7,7 @@ TODO add support get config from ftp server
 TODO add build-in ftp and tftp servers
 TODO add new network devices
 TODO add custom port for transport ssh, telnet, etc.
-
+TODO add support db sqlite postgres
+TODO add converter yaml <=> db
+TODO add web ui django pyramid?
 

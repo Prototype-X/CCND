@@ -10,6 +10,6 @@ hostname2:
   state: True
   group: group-name2
   ip: 1.1.1.2
-  profile: profile-name2.yaml
+  profile: /profile-name2.yaml
 
 ...
