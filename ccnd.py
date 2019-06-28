@@ -205,7 +205,7 @@ class BackupManager(object):
         return self.cfg_obj.load()
 
     def _template_load(self):
-        plugin = PluginBase(package='net-backup.plugins')
+        plugin = PluginBase(package='ccnd.plugins')
         return plugin.make_plugin_source(searchpath=[self.path['template_path']])
 
     def run(self):
@@ -243,7 +243,7 @@ def worker(host_data):
     template_name = host_data[1]['template']
     plugin_path = host_data[0]
     logger.info('Start backup device - Hostname: {} IP: {}'.format(hostname, host_ip))
-    plugin_base = PluginBase(package='net-backup.plugins')
+    plugin_base = PluginBase(package='ccnd.plugins')
     plugin_source = plugin_base.make_plugin_source(searchpath=[plugin_path])
     plugin_net_dev = plugin_source.load_plugin(template_name)
     template = plugin_net_dev.setup()
