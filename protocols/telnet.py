@@ -32,11 +32,13 @@ class Telnet(object):
 
     def load_data(self, cfg_device: dict):
         self.cfg_device = cfg_device
+        if 'port' not in self.cfg_device:
+            self.cfg_device['port'] = 23
 
     def connect(self):
         try:
-            self.telnet = pexpect.spawn('telnet', [self.cfg_device['ip']], logfile=sys.stdout, encoding='utf-8',
-                                        timeout=20)
+            self.telnet = pexpect.spawn('telnet', [self.cfg_device['ip'], self.cfg_device['port']],
+                                        logfile=sys.stdout, encoding='utf-8', timeout=20)
             self.telnet.expect(['UserName:', 'username:', 'Username:', 'login:'], timeout=10)
             self.telnet.write('{}\n'.format(self.cfg_device['login']))
             time.sleep(1.0)

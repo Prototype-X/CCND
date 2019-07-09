@@ -2,3 +2,4 @@
 __pycache__/
 backup.log*
 backup.log
+storage/

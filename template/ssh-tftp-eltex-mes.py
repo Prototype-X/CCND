@@ -26,8 +26,8 @@ class EdgeCore(SSH):
 
     def run_cmd(self):
         try:
-            self.cmd_copy = 'copy running-config tftp://{ip}/{name}\n'.format(ip=self.cfg_device['tftp_ip'],
-                                                                              name=self.cfg_device['name'])
+            self.cmd_copy = 'copy running-config tftp://{ip}/{name}.cfg\n'.format(ip=self.cfg_device['tftp_ip'],
+                                                                                  name=self.cfg_device['name'])
             self.ssh.write(self.cmd_copy)
             self.prompt = re.compile(r'Copy:.*bytes copied in.*')
             self.ssh.PROMPT = self.prompt
