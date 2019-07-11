@@ -37,7 +37,7 @@ class Telnet(object):
 
     def connect(self):
         try:
-            self.telnet = pexpect.spawn('telnet', [self.cfg_device['ip'], self.cfg_device['port']],
+            self.telnet = pexpect.spawn('telnet', [self.cfg_device['ip'], str(self.cfg_device['port'])],
                                         logfile=sys.stdout, encoding='utf-8', timeout=20)
             self.telnet.expect(['UserName:', 'username:', 'Username:', 'login:'], timeout=10)
             self.telnet.write('{}\n'.format(self.cfg_device['login']))
