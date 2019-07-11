@@ -122,7 +122,7 @@ class CliManager(object):
             sys.exit()
 
         if self.args.version:
-            print('CCND 0.1')
+            print('CCND 0.2')
             sys.exit()
 
         if self.args.cfg:
