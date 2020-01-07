@@ -16,9 +16,9 @@ import re
 from pexpect import pxssh
 
 
-class EdgeCore(SSH):
+class Eltex(SSH):
     def __init__(self):
-        super(EdgeCore, self).__init__()
+        super(Eltex, self).__init__()
         self.cmd_copy = ''
         self.cmd_tftp = ''
         self.cmd_fname = ''
@@ -40,4 +40,4 @@ class EdgeCore(SSH):
 
 
 def setup():
-    return EdgeCore()
+    return Eltex()
