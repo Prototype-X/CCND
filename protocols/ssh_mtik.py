@@ -6,6 +6,10 @@
 import pexpect
 import sys
 import logging
+"""
+    https://stackoverflow.com/questions/358783/python-set-terminal-type-in-pexpect
+    Trouble with mikrotik colour output. Disable colour term with env. Then can use pxssh.
+"""
 
 
 class SSH(object):
